@@ -43,16 +43,17 @@ const titleClickHandler = function(event){
     console.log(articleSelector);
 
 
-  /* find the correct article using the selector (value of 'href' attribute) */
+  /* [DONE] find the correct article using the selector (value of 'href' attribute) */
 
     const targetArticle = document.querySelector(articleSelector);
     console.log(targetArticle);
 
-  /* add class 'active' to the correct article */
+  /* [DONE] add class 'active' to the correct article */
 
     targetArticle.classList.add('active');  
 
 }
+
 
 const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
@@ -60,33 +61,56 @@ const optArticleSelector = '.post',
 
 function generateTitleLinks(){
 
-  /* remove contents of titleList */
+  /* [DONE] remove contents of titleList */
 
     const titleList = document.querySelector(optTitleListSelector);
     titleList.innerHTML='';
 
     console.log(titleList);
 
-  /* for each article */
+  /* [DONE] for each article */
 
-  const allArticles = document.querySelectorAll(optArticleSelector);
-  for(let eachArticle of allArticles){
-    eachArticle.innerHTML='';
+
   
 
-    /* get the article id */
+  const allArticles = document.querySelectorAll(optArticleSelector);
+
+  let html = '';  
+
+  for(let eachArticle of allArticles){
+    //eachArticle.innerHTML='';
+  
+
+    /* [DONE] get the article id */
 
     const articleId = eachArticle.getAttribute("id");
     console.log(articleId);
+  
+  
+    /* [DONE] find the title element */
+    
+  const articleTitle = eachArticle.querySelector(optTitleSelector).innerHTML;
+  console.log(articleTitle);
+
+
+  
+
+    /* [IN PROGRESS] get the title from the title element ??? */
+
+    /* [DONE] create HTML of the link */
+
+    const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+    console.log(linkHTML);
+    
+  
+    /* [IN PROGRESS] insert link into titleList */
+
+    html = html + linkHTML;
+
+    console.log(html);
   }
 
-    /* find the title element */
-
-    /* get the title from the title element */
-
-    /* create HTML of the link */
-
-    /* insert link into titleList */
+  titleList.innerHTML = html;
 
 }
 
