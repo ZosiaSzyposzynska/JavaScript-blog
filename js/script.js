@@ -62,9 +62,10 @@ document.getElementById('test-button').addEventListener('click', function(){
     optArticleAuthorSelector = '.post-author .list',  
     optTagsListSelector = '.tags.list',
     optCloudClassCount = '5',
-    optCloudClassPrefix = 'tag-size-';
+    optCloudClassPrefix = 'tag-size-',
+    optAuthorListSelector = '.authors';
 
-  function generateTitleLinks(customSelector = ''){
+  function generateTitleLinks(customSelector = '', author = ''){
 
     /* [DONE] remove contents of titleList */
 
@@ -281,8 +282,13 @@ document.getElementById('test-button').addEventListener('click', function(){
 
 
   function generateAuthors(){
+    /* create a new variable allAuthors with an empty object */
+    let allAuthors = {};
+    let allAuthorsHTML = '';
+
     /* find all articles */
     const allArticles = document.querySelectorAll(optArticleSelector);
+    
     /* STARTS LOOP: for every article */
     for(let eachArticle of allArticles){
       /* find article author */
@@ -298,9 +304,50 @@ document.getElementById('test-button').addEventListener('click', function(){
       html += authorLinkHtml;
       /* insert HTML of the link into the author wrapper */
       articleAuthorWrapper.innerHTML = html;
-      /*END OF LOOP: author for every article */
+      /* [NEW] check if this author is NOT already in allAuthors */
+      if (!allAuthors[articleAuthor]) {
+      /* [NEW] add the author to allAuthors object with initial value of 1 */
+        allAuthors[articleAuthor] = 1;
+      } else {
+      /* [NEW] increment the article count for the existing author */
+        allAuthors[articleAuthor]++;
+      }
+  
+      /* [NEW] find the list of authors in the right column */
+      const authorList = document.querySelector(optAuthorListSelector);
+      console.log(authorList);
+
+      /* [NEW] create variable for all links HTML code */
+      
     }
+    /* [NEW] START LOOP: for each author in allAuthors */
+    for (let author in allAuthors) {
+      const articleCount = getAuthorArticleCount(author);
+      const authorLinkHTML = '<li><a href="#author-' + author + '">' + author + '</a> (' + articleCount + ')</li>';
+      allAuthorsHTML += authorLinkHTML;
+      console.log(allAuthorsHTML);
+        
+    }
+
+    /* [NEW] END LOOP: for each author in allAuthors */
+
+    /* [NEW] add HTML from allAuthorsHTML to authorList */
+     
+   
+    
   }
+
+  function getAuthorArticleCount(author) {
+  /* find all articles with the specified author */
+    const articlesByAuthor = document.querySelectorAll('[data-author="' + author + '"]');
+
+    /* return the number of articles */
+    return articlesByAuthor;
+  }
+
+
+
+
 
   function addClickListenersToAuthors() {
   /* find all author links */
@@ -347,7 +394,7 @@ document.getElementById('test-button').addEventListener('click', function(){
     }
     /* execute function "generateTitleLinks" with article selector as argument */
     
-    generateTitleLinks('[data-tags="' + author + '"]');
+    generateTitleLinks('[data-author="' + author + '"]');
 
   }
 
