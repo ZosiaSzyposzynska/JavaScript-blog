@@ -63,7 +63,7 @@ document.getElementById('test-button').addEventListener('click', function(){
     optTagsListSelector = '.tags.list',
     optCloudClassCount = '5',
     optCloudClassPrefix = 'tag-size-',
-    optAuthorListSelector = '.authors';
+    optAuthorListSelector = '.authors.list';
 
   function generateTitleLinks(customSelector = '', author = ''){
 
