@@ -67,7 +67,7 @@
     optCloudClassPrefix = 'tag-size-',
     optAuthorListSelector = '.authors.list';
 
-  function generateTitleLinks(customSelector = '', author = ''){
+  function generateTitleLinks(customSelector = ''){
 
     /* [DONE] remove contents of titleList */
 
